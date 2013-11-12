@@ -13,6 +13,12 @@
         <strong>token:</strong> <%= @access_token.token %><br>
         <strong>secret:</strong> <%= @access_token.secret %><br>
       </p>
+      <p id='welcome'> Type something you'd like to tweet--for Nathan</p>
+
+  <form id= "tweet" action="/tweet" method="post">
+    <input type='text' id='tweet_text' name="tweet_text" placeholder="tweet">
+    <input id='submit_button' type="submit" value="Submit">
+  </form>
       <p>
         <button><a href="/sign_out">Sign Out</a></button>
       </p>
@@ -20,5 +26,5 @@
   <% else %>
     <button><a href="/sign_in">Sign In with Twitter</a></button>
   <% end %>
-  
+
 </div>

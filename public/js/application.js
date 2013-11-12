@@ -1,7 +1,18 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $('#submit_button').click(function(event){
+    event.preventDefault();
+    var status = $('<h4 id = "processing"> The form is currently processing </h4>');
+    $('#welcome').append(status);
+    var tweet_text = { "tweet_text": $('#tweet_text').val()};
+
+    $.post('/tweet', tweet_text, function(data){
+      $('#processing').hide();
+      var success = $('<h4 id = "success"> You successfully posted: ' + data + '</h4>');
+      $('#welcome').append(success)
+
+    },"json");
+
+  });
+
 });
