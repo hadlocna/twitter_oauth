@@ -21,15 +21,35 @@ get '/auth' do
   session[:token] = @access_token.token
   session[:secret] = @access_token.secret
   user = User.create(oauth_token: @access_token.token , oauth_secret: @access_token.secret)
+  session[:id] = user.id
   erb :index
 
 end
 
 post '/tweet' do
-  tweet = client.update(params[:tweet_text])
+  p '-------We are here!!----'
+  job_id = User.find(session[:id]).tweet(params[:tweet_text])
+  p '-----job id---------'
+  p job_id
+  # tweet = client.update(params[:tweet_text])
   if request.xhr?
-  tweet.text.to_json
+    p '-----inside xhr-------'
+  job_id.to_json
   else
   redirect '/'
   end
 end
+
+get '/status/:job_id' do
+  p '----inside get route-------'
+  p params[:job_id]
+
+  p '----job is complete response-----'
+ p job_is_complete(params[:job_id])
+ job_is_complete(params[:job_id]).to_json
+end
+
+
+
+
+

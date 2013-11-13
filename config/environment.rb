@@ -18,6 +18,8 @@ require 'logger'
 
 require 'sinatra'
 require 'shotgun'
+require 'sidekiq'
+require 'redis'
 
 require 'erb'
 
